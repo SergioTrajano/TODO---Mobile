@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: "center",
     },
 
     imageContainer: {
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
 
     list: {
         flex: 1,
-        backgroundColor: "#454545",
+        backgroundColor: "#1A1A1A",
         position: "relative",
         alignItems: "center",
     },
@@ -90,5 +91,26 @@ export const styles = StyleSheet.create({
         color: "#FFFFFF",
         fontSize: 12,
         textAlign: "center",
+    },
+
+    emptyListElement: {
+        borderTopWidth: 1,
+        borderTopColor: "#333333",
+        width: 327,
+        height: 208,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    emptyListTextBold: {
+        fontSize: 14,
+        color: "#808080",
+        fontWeight: "bold",
+        lineHeight: 19.6,
+        marginTop: 16,
+    },
+    emptyListText: {
+        fontSize: 14,
+        color: "#808080",
+        lineHeight: 19.6,
     },
 });
