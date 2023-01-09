@@ -4,12 +4,9 @@ import Plusign from "react-native-vector-icons/AntDesign";
 import ClipBoard from "react-native-vector-icons/Ionicons";
 
 import { styles } from "./style";
-import { Task } from "../../components/Task";
+import TaskComponent from "../../components/Task";
 
-type Task = {
-    name: string;
-    isDone: boolean;
-};
+import { Task } from "../../components/Task";
 
 export function Home() {
     const [newTask, setNewTask] = useState<string>("");
@@ -17,12 +14,29 @@ export function Home() {
 
     function handdleAddTask(): void {
         const taskToAdd: Task = {
-            name: newTask,
+            id: tasks.length + 1,
+            description: newTask,
             isDone: false,
         };
 
         setTasks((prevState) => [...prevState, taskToAdd]);
         setNewTask("");
+    }
+
+    function handleFinishTask(id: number) {
+        setTasks((prevState) =>
+            prevState.map((task) => {
+                if (task.id === id) {
+                    task.isDone = true;
+                }
+
+                return task;
+            })
+        );
+    }
+
+    function handleRemoveTask(id: number) {
+        setTasks((prevState) => prevState.filter((task) => task.id !== id));
     }
 
     return (
@@ -82,9 +96,15 @@ export function Home() {
                 </View>
 
                 <FlatList
-                    data={tasks.map((task) => task.name)}
-                    renderItem={() => <Text>Oi</Text>}
-                    keyExtractor={(item: string, i: number) => `${item + i}`}
+                    data={tasks.map((task) => JSON.stringify(task))}
+                    renderItem={({ item }) => (
+                        <TaskComponent
+                            task={item}
+                            onCheck={handleFinishTask}
+                            onRemove={handleRemoveTask}
+                        />
+                    )}
+                    keyExtractor={(item: string) => item}
                     showsVerticalScrollIndicator={false}
                     ListEmptyComponent={() => (
                         <View style={styles.emptyListElement}>
