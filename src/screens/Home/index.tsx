@@ -75,7 +75,7 @@ export function Home() {
                         <View style={styles.indicatorNumberContainer}>
                             <Text style={styles.indicatorNumber}>
                                 {tasks.reduce(
-                                    (total, prev) => (prev.isDone ? (total += 1) : total),
+                                    (total, prev) => (prev.isDone ? total : (total += 1)),
                                     0
                                 )}
                             </Text>
@@ -87,7 +87,7 @@ export function Home() {
                         <View style={styles.indicatorNumberContainer}>
                             <Text style={styles.indicatorNumber}>
                                 {tasks.reduce(
-                                    (total, prev) => (prev.isDone ? total : (total += 1)),
+                                    (total, prev) => (prev.isDone ? (total += 1) : total),
                                     0
                                 )}
                             </Text>
