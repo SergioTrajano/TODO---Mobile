@@ -73,12 +73,7 @@ export function Home() {
                     <View style={styles.indicator}>
                         <Text style={styles.indicatorTextCreated}>Criadas</Text>
                         <View style={styles.indicatorNumberContainer}>
-                            <Text style={styles.indicatorNumber}>
-                                {tasks.reduce(
-                                    (total, prev) => (prev.isDone ? total : (total += 1)),
-                                    0
-                                )}
-                            </Text>
+                            <Text style={styles.indicatorNumber}>{tasks.length}</Text>
                         </View>
                     </View>
 
