@@ -96,7 +96,10 @@ export function Home() {
                 </View>
 
                 <FlatList
-                    data={tasks.map((task) => JSON.stringify(task))}
+                    data={tasks
+                        .sort((x, y) => y.id - x.id)
+                        .sort((x, y) => Number(x.isDone) - Number(y.isDone))
+                        .map((task) => JSON.stringify(task))}
                     renderItem={({ item }) => (
                         <TaskComponent
                             task={item}
