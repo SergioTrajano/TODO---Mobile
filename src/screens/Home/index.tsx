@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import { View, Text, TextInput, Image, TouchableOpacity, FlatList } from "react-native";
+import Plusign from "react-native-vector-icons/AntDesign";
+import ClipBoard from "react-native-vector-icons/Ionicons";
 
 import { styles } from "./style";
+import { Task } from "../../components/Task";
 
 type Task = {
     name: string;
@@ -45,7 +47,7 @@ export function Home() {
                         style={styles.formButton}
                         onPress={handdleAddTask}
                     >
-                        <Icon
+                        <Plusign
                             name="pluscircleo"
                             size={16}
                             color="#FFFFFF"
@@ -78,6 +80,28 @@ export function Home() {
                         </View>
                     </View>
                 </View>
+
+                <FlatList
+                    data={tasks.map((task) => task.name)}
+                    renderItem={() => <Text>Oi</Text>}
+                    keyExtractor={(item: string, i: number) => `${item + i}`}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={() => (
+                        <View style={styles.emptyListElement}>
+                            <ClipBoard
+                                name="clipboard-outline"
+                                size={56}
+                                color="#808080"
+                            />
+                            <Text style={styles.emptyListTextBold}>
+                                Você ainda não tem tarefas cadastradas
+                            </Text>
+                            <Text style={styles.emptyListText}>
+                                Crie tarefas e organize seus itens a fazer
+                            </Text>
+                        </View>
+                    )}
+                />
             </View>
         </View>
     );
